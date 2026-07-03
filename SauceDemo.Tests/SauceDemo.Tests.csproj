@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk"> <!-- This creates the .NET test project. -->
+
+  <PropertyGroup> <!-- Basic settings for this test project. -->
+    <TargetFramework>net10.0</TargetFramework> <!-- This project uses .NET 10. -->
+    <LangVersion>latest</LangVersion> <!-- This lets C# use the latest language features. -->
+    <ImplicitUsings>enable</ImplicitUsings> <!-- .NET automatically adds common using statements. -->
+    <Nullable>enable</Nullable> <!-- C# warns us when a value might be null. -->
+    <IsPackable>false</IsPackable> <!-- This test project should not be packed as a NuGet package. -->
+  </PropertyGroup>
+
+  <ItemGroup> <!-- External packages used by the test project. -->
+    <PackageReference Include="coverlet.collector" Version="6.0.4" /> <!-- Adds code coverage support for tests. -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" /> <!-- Lets dotnet test discover and run tests. -->
+    <PackageReference Include="NUnit" Version="4.3.2" /> <!-- Adds the NUnit test framework. -->
+    <PackageReference Include="NUnit.Analyzers" Version="4.7.0" /> <!-- Adds warnings for common NUnit mistakes. -->
+    <PackageReference Include="NUnit3TestAdapter" Version="5.0.0" /> <!-- Connects NUnit tests to dotnet test. -->
+    <PackageReference Include="Reqnroll" Version="3.3.4" /> <!-- Adds Gherkin/BDD support. -->
+    <PackageReference Include="Reqnroll.NUnit" Version="3.3.4" /> <!-- Connects Reqnroll scenarios to NUnit. -->
+    <PackageReference Include="Selenium.WebDriver" Version="4.45.0" /> <!-- Adds Selenium browser automation tools. -->
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="149.0.7827.15500" /> <!-- Adds ChromeDriver so Selenium can open Chrome. -->
+  </ItemGroup>
+
+  <ItemGroup> <!-- Local project references used by the test project. -->
+    <ProjectReference Include="..\SauceDemo.Framework\SauceDemo.Framework.csproj" /> <!-- Lets tests use pages and browser helpers from the framework project. -->
+  </ItemGroup>
+
+  <ItemGroup> <!-- Global using statements for this project. -->
+    <Using Include="NUnit.Framework" /> <!-- Lets test files use Assert without adding using NUnit.Framework everywhere. -->
+  </ItemGroup>
+
+</Project> <!-- End of the test project file. -->

@@ -1,0 +1,24 @@
+name: Tests # The name shown in GitHub Actions.
+
+on: # This tells GitHub when to run the workflow.
+  push: # Run tests when code is pushed.
+  pull_request: # Run tests when a pull request is opened or updated.
+
+jobs: # A workflow is made of one or more jobs.
+  test: # This job builds and runs the test suite.
+    runs-on: ubuntu-latest # Use a fresh Linux machine from GitHub.
+
+    steps: # Steps run one by one inside the job.
+      - name: Checkout code # Download the repository code.
+        uses: actions/checkout@v4 # Official GitHub action for checking out code.
+
+      - name: Setup .NET # Install .NET on the GitHub machine.
+        uses: actions/setup-dotnet@v4 # Official GitHub action for installing .NET.
+        with: # Extra settings for setup-dotnet.
+          dotnet-version: '10.0.x' # Use the .NET 10 SDK.
+
+      - name: Restore dependencies # Download NuGet packages.
+        run: dotnet restore SauceDemoAutomation.slnx # Restore packages for the whole solution.
+
+      - name: Run tests # Build and run the automation tests.
+        run: dotnet test SauceDemoAutomation.slnx --configuration Release --no-restore # Run tests without restoring packages again.

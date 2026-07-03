@@ -1,0 +1,11 @@
+# Ignore compiled build output folders.
+bin/
+
+# Ignore temporary .NET build folders.
+obj/
+
+# Ignore Reqnroll generated code-behind files.
+*.feature.cs
+
+# Ignore personal study notes.
+doc/

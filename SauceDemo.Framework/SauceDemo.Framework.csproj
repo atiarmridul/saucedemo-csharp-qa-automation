@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk"> <!-- This creates a normal .NET class library project. -->
+
+  <PropertyGroup> <!-- Basic settings for this framework project. -->
+    <TargetFramework>net10.0</TargetFramework> <!-- This project uses .NET 10. -->
+    <LangVersion>latest</LangVersion> <!-- This lets C# use the latest language features. -->
+    <ImplicitUsings>enable</ImplicitUsings> <!-- .NET automatically adds common using statements. -->
+    <Nullable>enable</Nullable> <!-- C# warns us when a value might be null. -->
+  </PropertyGroup>
+
+  <ItemGroup> <!-- External packages used by the framework project. -->
+    <PackageReference Include="Selenium.Support" Version="4.45.0" /> <!-- Adds Selenium wait/helper tools. -->
+    <PackageReference Include="Selenium.WebDriver" Version="4.45.0" /> <!-- Adds Selenium browser automation tools. -->
+  </ItemGroup>
+
+</Project> <!-- End of the framework project file. -->

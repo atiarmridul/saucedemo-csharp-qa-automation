@@ -1,0 +1,4 @@
+<Solution> <!-- This file groups projects together so dotnet can build/test them as one solution. -->
+  <Project Path="SauceDemo.Framework/SauceDemo.Framework.csproj" /> <!-- The reusable framework project. -->
+  <Project Path="SauceDemo.Tests/SauceDemo.Tests.csproj" /> <!-- The Reqnroll/NUnit test project. -->
+</Solution> <!-- End of the solution file. -->
