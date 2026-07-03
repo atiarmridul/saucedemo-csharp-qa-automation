@@ -8,4 +8,4 @@ obj/
 *.feature.cs
 
 # Ignore personal study notes.
-doc/
+//doc/
