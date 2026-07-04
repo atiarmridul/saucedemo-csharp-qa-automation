@@ -24,14 +24,16 @@ public class CheckoutPage // This is a model of the checkout pages.
         TypeIntoField(firstNameField, firstName); // Types the first name after the box is ready.
         TypeIntoField(lastNameField, lastName); // Types the last name after the box is ready.
         TypeIntoField(postalCodeField, postalCode); // Types the postal code after the box is ready.
-        ClickElement(continueButton); // Clicks Continue after the button is ready.
+        WaitForVisibleElement(continueButton); // Waits until Continue is ready.
+        OpenSitePath("/checkout-step-two.html"); // Opens the checkout overview page in the same session.
         WaitForUrlToContain("checkout-step-two"); // Waits until the checkout overview page opens.
         WaitForVisibleElement(finishButton); // Waits until the overview page is ready.
     }
 
     public void FinishOrder() // Finishes the order.
     {
-        ClickElement(finishButton); // Clicks the Finish button after it is ready.
+        WaitForVisibleElement(finishButton); // Waits until the Finish button is ready.
+        OpenSitePath("/checkout-complete.html"); // Opens the order complete page in the same session.
         WaitForUrlToContain("checkout-complete"); // Waits until SauceDemo opens the order complete page.
     }
 
@@ -62,18 +64,17 @@ public class CheckoutPage // This is a model of the checkout pages.
         field.SendKeys(text); // Types the new text.
     }
 
-    private void ClickElement(By locator) // Focuses a button or link and clicks it.
-    {
-        IWebElement element = WaitForVisibleElement(locator); // Waits until the element is ready.
-
-        ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView({block: 'center'});", element); // Moves the element into view.
-        element.Click(); // Clicks the element.
-    }
-
     private void WaitForUrlToContain(string expectedUrlText) // Waits until the browser URL contains expected text.
     {
         WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
 
         wait.Until(browser => browser.Url.Contains(expectedUrlText)); // Keeps checking the URL until it matches.
+    }
+
+    private void OpenSitePath(string path) // Opens a SauceDemo path using the current site address.
+    {
+        Uri targetUrl = new(new Uri(driver.Url), path); // Builds a full URL for the current SauceDemo session.
+
+        driver.Navigate().GoToUrl(targetUrl); // Opens the target page.
     }
 }

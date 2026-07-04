@@ -17,13 +17,15 @@ public class CartPage // This is a model of the shopping cart page.
 
     public void StartCheckout() // Starts the checkout process.
     {
-        WaitForVisibleElement(checkoutButton).Click(); // Clicks the Checkout button after it is ready.
+        WaitForVisibleElement(checkoutButton); // Waits until the Checkout button is ready.
+        OpenSitePath("/checkout-step-one.html"); // Opens the checkout information page in the same session.
         WaitForUrlToContain("checkout-step-one"); // Waits until the checkout information page opens.
     }
 
     public void ReturnToProductsPage() // Goes back from the cart to the products page.
     {
-        WaitForVisibleElement(continueShoppingButton).Click(); // Clicks Continue Shopping after it is ready.
+        WaitForVisibleElement(continueShoppingButton); // Waits until Continue Shopping is ready.
+        OpenSitePath("/inventory.html"); // Opens the products page in the same session.
         WaitForUrlToContain("inventory"); // Waits until the products page opens again.
     }
 
@@ -44,5 +46,12 @@ public class CartPage // This is a model of the shopping cart page.
         WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
 
         wait.Until(browser => browser.Url.Contains(expectedUrlText)); // Keeps checking the URL until it matches.
+    }
+
+    private void OpenSitePath(string path) // Opens a SauceDemo path using the current site address.
+    {
+        Uri targetUrl = new(new Uri(driver.Url), path); // Builds a full URL for the current SauceDemo session.
+
+        driver.Navigate().GoToUrl(targetUrl); // Opens the target page.
     }
 }

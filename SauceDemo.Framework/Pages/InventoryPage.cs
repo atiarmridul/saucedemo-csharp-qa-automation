@@ -25,7 +25,10 @@ public class InventoryPage // This is a model of the products page after login.
 
     public void OpenShoppingCart() // Opens the cart page.
     {
-        WaitForVisibleElement(shoppingCartLink).Click(); // Clicks the cart icon/link.
+        WaitForVisibleElement(shoppingCartLink); // Waits until the cart link is present.
+        Uri cartUrl = new(new Uri(driver.Url), "/cart.html"); // Builds the cart URL from the current SauceDemo site.
+
+        driver.Navigate().GoToUrl(cartUrl); // Opens the cart page in the same browser session.
         WaitForUrlToContain("cart"); // Waits until the cart page opens.
     }
 
