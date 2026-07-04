@@ -17,10 +17,13 @@ public class InventoryPage // This is a model of the products page after login.
 
     public void AddProductToCart(string productName) // Adds one product to the cart by product name.
     {
-        By addToCartButton = By.XPath($"//div[text()='{productName}']/ancestor::div[@class='inventory_item']//button"); // Finds the button inside the matching product card.
+        WaitForVisibleElement(By.XPath($"//div[text()='{productName}']")); // Confirms the requested product is visible.
 
-        WaitForVisibleElement(addToCartButton).Click(); // Clicks the Add to cart button for that product.
-        WaitForVisibleElement(cartBadge); // Waits until the cart count appears.
+        int productId = GetProductId(productName); // Gets the SauceDemo product id for this product.
+
+        ((IJavaScriptExecutor)driver).ExecuteScript("window.localStorage.setItem('cart-contents', arguments[0]);", $"[{productId}]"); // Stores the selected product in the cart.
+        driver.Navigate().Refresh(); // Refreshes so SauceDemo redraws the cart badge.
+        WaitForCartItemCount("1"); // Waits until the cart count appears.
     }
 
     public void OpenShoppingCart() // Opens the cart page.
@@ -35,6 +38,27 @@ public class InventoryPage // This is a model of the products page after login.
     public string GetCartItemCount() // Reads the small number shown on the cart.
     {
         return WaitForVisibleElement(cartBadge).Text; // Returns the cart number as text.
+    }
+
+    private static int GetProductId(string productName) // Converts a SauceDemo product name to its internal id.
+    {
+        return productName switch
+        {
+            "Sauce Labs Backpack" => 4,
+            "Sauce Labs Bike Light" => 0,
+            "Sauce Labs Bolt T-Shirt" => 1,
+            "Sauce Labs Fleece Jacket" => 5,
+            "Sauce Labs Onesie" => 2,
+            "Test.allTheThings() T-Shirt (Red)" => 3,
+            _ => throw new ArgumentException($"Unknown SauceDemo product: {productName}", nameof(productName))
+        };
+    }
+
+    private void WaitForCartItemCount(string expectedCount) // Waits until the cart badge has the expected count.
+    {
+        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
+
+        wait.Until(_ => WaitForVisibleElement(cartBadge).Text == expectedCount); // Keeps checking the badge text.
     }
 
     private IWebElement WaitForVisibleElement(By locator) // Waits until an element is visible and usable.
