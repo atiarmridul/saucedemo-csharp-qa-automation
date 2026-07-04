@@ -29,7 +29,7 @@ public class CartPage // This is a model of the shopping cart page.
 
     private IWebElement WaitForVisibleElement(By locator) // Waits until an element is visible and usable.
     {
-        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(10)); // Gives Selenium up to 10 seconds.
+        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
 
         return wait.Until(browser => // Keeps checking until the element is ready.
         {
@@ -41,7 +41,7 @@ public class CartPage // This is a model of the shopping cart page.
 
     private void WaitForUrlToContain(string expectedUrlText) // Waits until the browser URL contains expected text.
     {
-        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(10)); // Gives Selenium up to 10 seconds.
+        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
 
         wait.Until(browser => browser.Url.Contains(expectedUrlText)); // Keeps checking the URL until it matches.
     }

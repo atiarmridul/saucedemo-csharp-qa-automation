@@ -19,23 +19,36 @@ public class InventoryPage // This is a model of the products page after login.
     {
         By addToCartButton = By.XPath($"//div[text()='{productName}']/ancestor::div[@class='inventory_item']//button"); // Finds the button inside the matching product card.
 
-        driver.FindElement(addToCartButton).Click(); // Clicks the Add to cart button for that product.
+        WaitForVisibleElement(addToCartButton).Click(); // Clicks the Add to cart button for that product.
+        WaitForVisibleElement(cartBadge); // Waits until the cart count appears.
     }
 
     public void OpenShoppingCart() // Opens the cart page.
     {
-        driver.FindElement(shoppingCartLink).Click(); // Clicks the cart icon/link.
+        WaitForVisibleElement(shoppingCartLink).Click(); // Clicks the cart icon/link.
         WaitForUrlToContain("cart"); // Waits until the cart page opens.
     }
 
     public string GetCartItemCount() // Reads the small number shown on the cart.
     {
-        return driver.FindElement(cartBadge).Text; // Returns the cart number as text.
+        return WaitForVisibleElement(cartBadge).Text; // Returns the cart number as text.
+    }
+
+    private IWebElement WaitForVisibleElement(By locator) // Waits until an element is visible and usable.
+    {
+        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
+
+        return wait.Until(browser => // Keeps checking until the element is ready.
+        {
+            IWebElement element = browser.FindElement(locator); // Finds the element.
+
+            return element.Displayed && element.Enabled ? element : null; // Returns it only when we can see and use it.
+        });
     }
 
     private void WaitForUrlToContain(string expectedUrlText) // Waits until the browser URL contains expected text.
     {
-        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(10)); // Gives Selenium up to 10 seconds.
+        WebDriverWait wait = new(driver, TimeSpan.FromSeconds(20)); // Gives Selenium up to 20 seconds in CI.
 
         wait.Until(browser => browser.Url.Contains(expectedUrlText)); // Keeps checking the URL until it matches.
     }
