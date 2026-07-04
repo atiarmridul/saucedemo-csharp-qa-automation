@@ -1,6 +1,6 @@
 # SauceDemo Automation
 
-[![Tests](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml/badge.svg)](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml)
+[![Tests](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml?query=branch%3Amain)
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
 ![C#](https://img.shields.io/badge/C%23-latest-239120?logo=csharp)
 ![Selenium](https://img.shields.io/badge/Selenium-4.45.0-43B02A?logo=selenium)
