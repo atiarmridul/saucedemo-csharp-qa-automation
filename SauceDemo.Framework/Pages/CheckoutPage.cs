@@ -25,6 +25,7 @@ public class CheckoutPage // This is a model of the checkout pages.
         TypeIntoField(lastNameField, lastName); // Types the last name after the box is ready.
         TypeIntoField(postalCodeField, postalCode); // Types the postal code after the box is ready.
         ClickElement(continueButton); // Clicks Continue after the button is ready.
+        WaitForUrlToContain("checkout-step-two"); // Waits until the checkout overview page opens.
         WaitForVisibleElement(finishButton); // Waits until the overview page is ready.
     }
 

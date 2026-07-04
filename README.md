@@ -1,5 +1,13 @@
 # SauceDemo Automation
 
+[![Tests](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml/badge.svg)](https://github.com/atiarmridul/saucedemo-csharp-qa-automation/actions/workflows/tests.yml)
+![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-latest-239120?logo=csharp)
+![Selenium](https://img.shields.io/badge/Selenium-4.45.0-43B02A?logo=selenium)
+![NUnit](https://img.shields.io/badge/NUnit-4.3.2-25A162)
+![Reqnroll](https://img.shields.io/badge/Reqnroll-3.3.4-6B46C1)
+![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions)
+
 This project is for the Senior QA Automation Engineer take-home exercise.
 
 It automates the SauceDemo website:
