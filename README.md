@@ -63,6 +63,14 @@ SauceDemoAutomation/
 └── SauceDemoAutomation.slnx
 ```
 
+## Visual Project Flow
+
+See the visual test execution and scenario diagrams here:
+
+```text
+doc/VISUAL_PROJECT_FLOW.md
+```
+
 ## What Each Folder Means
 
 ### `SauceDemo.Framework`
